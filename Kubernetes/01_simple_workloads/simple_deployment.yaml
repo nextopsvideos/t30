@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simple-deploy
+  labels:
+    app: nginx
+    env: prod
+spec: 
+  replicas: 10
+  selector:
+    matchLabels:
+      app: nginx  
+  template:
+    metadata:
+      name: simple-pod
+      labels:
+        app: nginx
+        team: devops          
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:latest
+          ports:
+            - containerPort: 80
