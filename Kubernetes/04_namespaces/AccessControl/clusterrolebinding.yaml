@@ -1,8 +1,7 @@
 apiVersion: rbac.authorization.k8s.io/v1
-kind: RoleBinding
+kind: ClusterRoleBinding
 metadata:
-  name: pod-log-role-binding 
-  namespace: dev-team 
+  name: pod-log-role-binding
 subjects:
 - kind: User
   name: nextops.t28@gmail.com
