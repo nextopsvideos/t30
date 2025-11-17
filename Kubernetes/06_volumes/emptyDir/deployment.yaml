@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-ed
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: nginx-ed
+  template:
+    metadata:
+      labels:
+        app: nginx-ed
+    spec:
+      containers:
+      - name: nginx-ed
+        image: nginx        
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: empdir-vol 
+          mountPath: /temp_data
+      volumes:
+      - name: empdir-vol
+        emptyDir: {} #Anonymous volumes in docker
