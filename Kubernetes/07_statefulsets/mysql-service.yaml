@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service 
+metadata:
+  name: mysqlsvc
+spec:
+  selector:
+    app: mysql
+  ports:
+  - port: 3306
+    targetPort: 3306
+    protocol: TCP
+  clusterIP: None  #NO IP ADDRESS 
+
+#FQDN
+# statefulsetname.headlessservicename.namespacename.svc.cluster.local
+# mysql.mysqlsvc.default.svc.cluster.local
+
+# mysql-0.mysqlsvc.default.svc.cluster.local
+# mysql-1.mysqlsvc.default.svc.cluster.local
