@@ -9,7 +9,7 @@ spec:
   - port: 3306
     targetPort: 3306
     protocol: TCP
-  clusterIP: None  #NO IP ADDRESS 
+  clusterIP: None             #NO IP ADDRESS 
 
 #FQDN
 # statefulsetname.headlessservicename.namespacename.svc.cluster.local

@@ -1,12 +1,12 @@
 apiVersion: apps/v1 
-kind: Statefulset
+kind: StatefulSet                   # Controller
 metadata:
   name: mysql 
   labels:
     app: mysql
 spec:
-  serviceName: mysqlsvc #headless service name***
-  replicas: 3
+  serviceName: mysqlsvc             # headless service name***
+  replicas: 2
   selector:
     matchLabels:
       app: mysql
@@ -28,9 +28,9 @@ spec:
               key: mysql-root-password
         volumeMounts:
         - name: mysql-config
-          mountPath: /etc/mysql/conf.d/ #/etc/mysql/conf.d/my.cnf
+          mountPath: /etc/mysql/conf.d/         #/etc/mysql/conf.d/my.cnf
         - name: data-pvc
-          mountPath: /var/lib/mysql #mysql db default location
+          mountPath: /var/lib/mysql             #mysql db default location
       volumes:
       - name: mysql-config
         configMap:
