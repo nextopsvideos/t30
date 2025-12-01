@@ -1,0 +1,8 @@
+---
+controller:
+  containerName: ctlr  
+  replicaCount: 2
+  resources:
+    requests:
+      cpu: 150m
+      memory: 100Mi
