@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: order-processor
+  namespace: default
+spec:
+  replicas: 0  # KEDA will manage scaling
+  selector:
+    matchLabels:
+      app: order-processor
+  template:
+    metadata:
+      labels:
+        app: order-processor
+    spec:
+      serviceAccountName: order-processor-sa
+      containers:
+        - name: order-processor
+          image: myregistry.azurecr.io/order-processor:latest
+          env:
+            - name: SERVICEBUS_CONNECTION_STRING
+              valueFrom:
+                secretKeyRef:
+                  name: servicebus-conn
+                  key: connectionString
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: order-processor-sa

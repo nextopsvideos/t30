@@ -1,0 +1,28 @@
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: order-processor-scaledobject
+spec:
+  scaleTargetRef:
+    name: order-processor  # deployment name
+  pollingInterval: 15             # check queue every 15 seconds
+  cooldownPeriod: 30              # scale down after 30 sec of inactivity
+  minReplicaCount: 0              # scale to zero allowed
+  maxReplicaCount: 10
+  triggers:
+    - type: azure-servicebus
+      metadata:
+        queueName: order-queue
+        messageCount: "10"         # trigger scale up when queue > 10 messages
+      authenticationRef:
+        name: keda-servicebus-auth
+---
+apiVersion: keda.sh/v1alpha1
+kind: TriggerAuthentication
+metadata:
+  name: keda-servicebus-auth
+spec:
+  secretTargetRef:
+    - parameter: connection
+      name: servicebus-conn
+      key: connectionString
