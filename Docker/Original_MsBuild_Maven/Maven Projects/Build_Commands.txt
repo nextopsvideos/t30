@@ -1,4 +1,0 @@
-navigate to my-app
-mvn vaildate
-mvn compile
-mvn package
