@@ -1,0 +1,12 @@
+- name: Create user5 with encrypted password
+  hosts: clients
+  remote_user: root 
+  vars_files:
+    - secret.txt
+  
+  tasks:
+  - name: Creating user5 with encrypted password
+    user: 
+      name: euser5
+      password: "{{ secret | password_hash('sha512') }}"
+      state: present

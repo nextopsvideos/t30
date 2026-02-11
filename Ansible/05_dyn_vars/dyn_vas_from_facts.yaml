@@ -1,0 +1,13 @@
+- name: Creating dynamic var from gathered facts 
+  hosts: clients 
+  remote_user: root 
+  gather_facts: yes 
+
+  tasks:
+  - name: create a var to store gathered facts 
+    debug:
+      var: ansible_facts
+  
+  - name: print a specific value from the variable 
+    debug:
+      msg: "{{ ansible_facts.os_family }}"

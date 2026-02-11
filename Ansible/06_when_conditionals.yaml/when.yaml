@@ -1,0 +1,24 @@
+- name: Installing webserver app based on OS flavour
+  hosts: clients
+  remote_user: root 
+  
+  tasks:
+  - name: Install nginx webserver if it is Ubuntu
+    apt:
+      name: nginx
+      state: present 
+    when: ansible_os_family == "Debian"
+  
+  - name: Install httpd webserver if it is Redhat
+    yum: 
+      name: httpd 
+      state: present 
+    when: ansible_os_family == "RedHat"
+  
+  - name: Install IIS webserver if it is Windows server 
+    win_feature:
+      name:
+      - Web-Server
+      - Web-Common-Http
+      state: present
+    when: ansible_os_family == "Windows"

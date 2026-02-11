@@ -1,0 +1,9 @@
+- name: Install IIS on windows
+  hosts: win 
+  remote_user: ansible
+
+  tasks:
+  - name: Install IIS on windows 
+    win_feature:
+      name: Web-Server
+      state: present

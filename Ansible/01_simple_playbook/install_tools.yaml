@@ -1,0 +1,41 @@
+- name: Test Connectivity, Install tools 
+  hosts: clients
+  remote_user: root 
+
+  tasks:
+  - name: Test Connectivity
+    ping:
+
+  - name: Install tree
+    apt:
+      name: tree 
+      state: present
+      update_cache: yes
+  
+  - name: Install wget
+    apt:
+      name: wget 
+      state: present
+      update_cache: yes
+  
+  - name: Install vim
+    apt:
+      name: vim 
+      state: present
+      update_cache: yes
+    
+  - name: Install curl
+    apt:
+      name: curl
+      state: present
+      update_cache: yes
+  
+  - name: create folder
+    file:
+      path: /home/charan/new_data
+      state: directory
+  
+  - name: create file 
+    file:
+      path: /home/charan/new_data/data.txt 
+      state: touch
